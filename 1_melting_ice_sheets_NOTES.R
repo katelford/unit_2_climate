@@ -31,9 +31,18 @@ plot(mass_Gt~decimal_date, data=ant_ice_loss, type="l", ylim=range(grn_ice_loss$
 data_break=data.frame(decimal_date=2018, mass_Gt=NA, sigma_Gt=NA)
 data_break
 
-ant_ice_loss_with_NA = rbind(ant_ice_loss, data_break)
+ant_ice_loss_with_NA=rbind(ant_ice_loss, data_break)
 tail(ant_ice_loss_with_NA)
 
 ant_ice_loss_with_NA=ant_ice_loss_with_NA[order(ant_ice_loss_with_NA$decimal_date), ]   #orders the data by the row adjusted for with NA (but still reports all the rows), the blank tells it to report all the columns 
 
 plot(mass_Gt~decimal_date, data=ant_ice_loss_with_NA, type="l")
+
+#adjusting the Greenland data
+grn_ice_loss_with_NA=rbind(grn_ice_loss, data_break)
+grn_ice_loss_with_NA=grn_ice_loss_with_NA[order(grn_ice_loss_with_NA$decimal_date), ]
+plot(mass_Gt~decimal_date, data=grn_ice_loss_with_NA, type="l")
+
+#combining the two plots
+plot(mass_Gt~decimal_date, data=grn_ice_loss_with_NA, type="l")
+lines(mass_Gt~decimal_date, data=ant_ice_loss_with_NA, col="blue")
