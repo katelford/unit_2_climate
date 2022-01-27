@@ -1,5 +1,5 @@
 #Melting Ice
-#26-01-2022
+#27-01-2022
 
 ant_ice_loss = read.table("data/antarctica_mass_200204_202111.txt", skip=31, sep="", header = FALSE, col.names = c("decimal_date", "mass_Gt", "sigma_Gt"))
 
