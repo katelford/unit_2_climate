@@ -1,6 +1,7 @@
 #Melting Ice
 #27-01-2022
 
+
 ant_ice_loss = read.table("data/antarctica_mass_200204_202111.txt", skip=31, sep="", header = FALSE, col.names = c("decimal_date", "mass_Gt", "sigma_Gt"))
 
 head(ant_ice_loss)   #see the first 6 rows of data
@@ -79,11 +80,13 @@ barplot(height=-1*c(min(ant_ice_loss_with_NA, na.rm=T), min(grn_ice_loss_with_NA
 #bar plot showing annual rate of ice loss
 pdf("figures/annual_ice_loss_trends.pdf")
 
+nrows=dim(ant_ice_loss_with_NA)[1]
 
+year_change=ant_ice_loss_with_NA$decimal_date[nrows]
 
-ant_change=min(ant_ice_loss_with_NA, na.rm=T)/
-grn_change=min(grn_ice_loss_with_NA, na.rm=T)/
+ant_change=min(ant_ice_loss_with_NA, na.rm=T)/year_change
+grn_change=min(grn_ice_loss_with_NA, na.rm=T)/year_change
 
-barplot(height=c(ant_change, grn_change), names.arg=c("Antarctica", "Greenland", ylab="Annual rate of change"))
+barplot(height=-1*c(ant_change, grn_change), names.arg=c("Antarctica", "Greenland"), ylab="Annual rate of change")
 
 dev.off()
